@@ -9,6 +9,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -22,6 +23,17 @@ func main() {
 	}
 
 	router := chi.NewRouter()
+	// Basic CORS
+	// for more ideas, see: https://developer.github.com/v3/#cross-origin-resource-sharing
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		// AllowOriginFunc:  func(r *http.Request, origin string) bool { return true },
+		AllowedMethods:   []string{"GET", "POST"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: false,
+		MaxAge:           300, // Maximum value not ignored by any of major browsers
+	}))
 
 	port := os.Getenv("PORT")
 	if port == "" {
