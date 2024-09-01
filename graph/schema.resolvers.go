@@ -6,9 +6,7 @@ package graph
 
 import (
 	"context"
-	"crypto/rand"
 	"fmt"
-	"math/big"
 	"time"
 	"wireman/graph/model"
 )
@@ -21,18 +19,25 @@ func (r *mutationResolver) CreateArticle(ctx context.Context, input model.NewArt
 // Articles is the resolver for the articles field.
 func (r *queryResolver) Articles(ctx context.Context) ([]*model.Article, error) {
 	var arr []*model.Article
-	randNumber, _ := rand.Int(rand.Reader, big.NewInt(100))
 	currentTime := time.Now()
 	article1 := &model.Article{
-		Title:   "Test Article Title",
-		ID:      fmt.Sprintf("T%d", randNumber),
+		Title:   "นางแบกเพื่อไทย ตระบัดสัตย์ ไม่แคร์ เลือกผลประโยชน์ ช่าวเน็ตลั่น 'จะไปสุดที่ตรงไหน'",
+		ID:      "T1",
 		Type:    model.ArticleStyleGreenViper,
 		Date:    currentTime.String(),
-		Caption: "Text Caption",
-		Link:    "https://google.com",
+		Caption: "พรรคประชาธิปัตย์มีมติเอกฉันท์ 34 เสียง เข้าร่วมรัฐบาลเพื่อไทย",
+		Link:    "https://www.youtube.com/watch?si=7_HhjpeTeqmystp0&v=-ZC5Y8heDPk&feature=youtu.be",
+	}
+	article2 := &model.Article{
+		Title:   "ครั้งแรกประวัติศาสตร์ สว.ไทย 'เลือกกันเอง'",
+		ID:      "T2",
+		Type:    model.ArticleStyleMediumVioletRed,
+		Date:    currentTime.String(),
+		Caption: "คนไทยอึ้ง แบบนี้ก็ได้หรอ",
+		Link:    "https://www.thaipbs.or.th/news/content/337938",
 	}
 
-	return append(arr, article1), nil
+	return append(arr, article1, article2), nil
 }
 
 // Mutation returns MutationResolver implementation.

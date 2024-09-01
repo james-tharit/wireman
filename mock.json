@@ -1,0 +1,18 @@
+{
+    "articles": [
+        {
+            "id": "T1",
+            "title": "นางแบกเพื่อไทย ตระบัดสัตย์ ไม่แคร์ เลือกผลประโยชน์ ช่าวเน็ตลั่น 'จะไปสุดที่ตรงไหน'",
+            "caption": "พรรคประชาธิปัตย์มีมติเอกฉันท์ 34 เสียง เข้าร่วมรัฐบาลเพื่อไทย",
+            "type": "ArticleStyleGreenViper",
+            "link": "https://www.youtube.com/watch?si=7_HhjpeTeqmystp0&v=-ZC5Y8heDPk&feature=youtu.be"
+        },
+        {
+            "id": "T2",
+            "title": "ครั้งแรกประวัติศาสตร์ สว.ไทย 'เลือกกันเอง'",
+            "caption": "คนไทยอึ้ง แบบนี้ก็ได้หรอ",
+            "type": "ArticleStyleMediumVioletRed",
+            "link": "https://www.thaipbs.or.th/news/content/337938"
+        }
+    ]
+}
