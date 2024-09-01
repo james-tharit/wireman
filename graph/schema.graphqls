@@ -1,0 +1,34 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+enum ArticleStyle {
+  GreenViper,
+  MediumVioletRed,
+  DodgerBlue,
+  DimGray
+}
+
+type Article {
+  id: ID!
+  title: String!
+  caption: String!
+  link: String!
+  type: ArticleStyle!
+  date: String!
+}
+
+type Query {
+  articles: [Article]!
+}
+
+input NewArticle {
+  title: String!
+  caption: String!
+  link: String!
+  type: ArticleStyle!
+}
+
+type Mutation {
+  createArticle(input: NewArticle!): Article!
+}
