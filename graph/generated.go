@@ -49,11 +49,12 @@ type DirectiveRoot struct {
 type ComplexityRoot struct {
 	Article struct {
 		Caption func(childComplexity int) int
-		Date    func(childComplexity int) int
+		Created func(childComplexity int) int
 		ID      func(childComplexity int) int
 		Link    func(childComplexity int) int
 		Title   func(childComplexity int) int
 		Type    func(childComplexity int) int
+		Updated func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -98,12 +99,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Article.Caption(childComplexity), true
 
-	case "Article.date":
-		if e.complexity.Article.Date == nil {
+	case "Article.created":
+		if e.complexity.Article.Created == nil {
 			break
 		}
 
-		return e.complexity.Article.Date(childComplexity), true
+		return e.complexity.Article.Created(childComplexity), true
 
 	case "Article.id":
 		if e.complexity.Article.ID == nil {
@@ -132,6 +133,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Article.Type(childComplexity), true
+
+	case "Article.updated":
+		if e.complexity.Article.Updated == nil {
+			break
+		}
+
+		return e.complexity.Article.Updated(childComplexity), true
 
 	case "Mutation.createArticle":
 		if e.complexity.Mutation.CreateArticle == nil {
@@ -565,8 +573,8 @@ func (ec *executionContext) fieldContext_Article_type(_ context.Context, field g
 	return fc, nil
 }
 
-func (ec *executionContext) _Article_date(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Article_date(ctx, field)
+func (ec *executionContext) _Article_created(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_created(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -579,7 +587,7 @@ func (ec *executionContext) _Article_date(ctx context.Context, field graphql.Col
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Date, nil
+		return obj.Created, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -596,7 +604,51 @@ func (ec *executionContext) _Article_date(ctx context.Context, field graphql.Col
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Article_date(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Article_created(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Article",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Article_updated(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_updated(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Updated, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Article_updated(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Article",
 		Field:      field,
@@ -658,8 +710,10 @@ func (ec *executionContext) fieldContext_Mutation_createArticle(ctx context.Cont
 				return ec.fieldContext_Article_link(ctx, field)
 			case "type":
 				return ec.fieldContext_Article_type(ctx, field)
-			case "date":
-				return ec.fieldContext_Article_date(ctx, field)
+			case "created":
+				return ec.fieldContext_Article_created(ctx, field)
+			case "updated":
+				return ec.fieldContext_Article_updated(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Article", field.Name)
 		},
@@ -727,8 +781,10 @@ func (ec *executionContext) fieldContext_Query_articles(_ context.Context, field
 				return ec.fieldContext_Article_link(ctx, field)
 			case "type":
 				return ec.fieldContext_Article_type(ctx, field)
-			case "date":
-				return ec.fieldContext_Article_date(ctx, field)
+			case "created":
+				return ec.fieldContext_Article_created(ctx, field)
+			case "updated":
+				return ec.fieldContext_Article_updated(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Article", field.Name)
 		},
@@ -2730,8 +2786,13 @@ func (ec *executionContext) _Article(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "date":
-			out.Values[i] = ec._Article_date(ctx, field, obj)
+		case "created":
+			out.Values[i] = ec._Article_created(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updated":
+			out.Values[i] = ec._Article_updated(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}

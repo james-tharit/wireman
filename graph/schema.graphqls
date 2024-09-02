@@ -15,7 +15,8 @@ type Article {
   caption: String!
   link: String!
   type: ArticleStyle!
-  date: String!
+  created: String!
+  updated: String!
 }
 
 type Query {

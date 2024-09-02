@@ -24,7 +24,8 @@ func (r *queryResolver) Articles(ctx context.Context) ([]*model.Article, error) 
 		Title:   "นางแบกเพื่อไทย ตระบัดสัตย์ ไม่แคร์ เลือกผลประโยชน์ ช่าวเน็ตลั่น 'จะไปสุดที่ตรงไหน'",
 		ID:      "T1",
 		Type:    model.ArticleStyleGreenViper,
-		Date:    currentTime.String(),
+		Created: currentTime.String(),
+		Updated: currentTime.String(),
 		Caption: "พรรคประชาธิปัตย์มีมติเอกฉันท์ 34 เสียง เข้าร่วมรัฐบาลเพื่อไทย",
 		Link:    "https://www.youtube.com/watch?si=7_HhjpeTeqmystp0&v=-ZC5Y8heDPk&feature=youtu.be",
 	}
@@ -32,7 +33,8 @@ func (r *queryResolver) Articles(ctx context.Context) ([]*model.Article, error) 
 		Title:   "ครั้งแรกประวัติศาสตร์ สว.ไทย 'เลือกกันเอง'",
 		ID:      "T2",
 		Type:    model.ArticleStyleMediumVioletRed,
-		Date:    currentTime.String(),
+		Created: currentTime.String(),
+		Updated: currentTime.String(),
 		Caption: "คนไทยอึ้ง แบบนี้ก็ได้หรอ",
 		Link:    "https://www.thaipbs.or.th/news/content/337938",
 	}

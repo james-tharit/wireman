@@ -14,7 +14,8 @@ type Article struct {
 	Caption string       `json:"caption"`
 	Link    string       `json:"link"`
 	Type    ArticleStyle `json:"type"`
-	Date    string       `json:"date"`
+	Created string       `json:"created"`
+	Updated string       `json:"updated"`
 }
 
 type Mutation struct {
