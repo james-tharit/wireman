@@ -48,13 +48,16 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Article struct {
-		Caption func(childComplexity int) int
-		Created func(childComplexity int) int
-		ID      func(childComplexity int) int
-		Link    func(childComplexity int) int
-		Title   func(childComplexity int) int
-		Type    func(childComplexity int) int
-		Updated func(childComplexity int) int
+		ArticleType func(childComplexity int) int
+		Author      func(childComplexity int) int
+		Body        func(childComplexity int) int
+		Created     func(childComplexity int) int
+		ID          func(childComplexity int) int
+		Likes       func(childComplexity int) int
+		Shares      func(childComplexity int) int
+		Title       func(childComplexity int) int
+		Updated     func(childComplexity int) int
+		Views       func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -92,12 +95,26 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	_ = ec
 	switch typeName + "." + field {
 
-	case "Article.caption":
-		if e.complexity.Article.Caption == nil {
+	case "Article.articleType":
+		if e.complexity.Article.ArticleType == nil {
 			break
 		}
 
-		return e.complexity.Article.Caption(childComplexity), true
+		return e.complexity.Article.ArticleType(childComplexity), true
+
+	case "Article.author":
+		if e.complexity.Article.Author == nil {
+			break
+		}
+
+		return e.complexity.Article.Author(childComplexity), true
+
+	case "Article.body":
+		if e.complexity.Article.Body == nil {
+			break
+		}
+
+		return e.complexity.Article.Body(childComplexity), true
 
 	case "Article.created":
 		if e.complexity.Article.Created == nil {
@@ -113,12 +130,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Article.ID(childComplexity), true
 
-	case "Article.link":
-		if e.complexity.Article.Link == nil {
+	case "Article.likes":
+		if e.complexity.Article.Likes == nil {
 			break
 		}
 
-		return e.complexity.Article.Link(childComplexity), true
+		return e.complexity.Article.Likes(childComplexity), true
+
+	case "Article.shares":
+		if e.complexity.Article.Shares == nil {
+			break
+		}
+
+		return e.complexity.Article.Shares(childComplexity), true
 
 	case "Article.title":
 		if e.complexity.Article.Title == nil {
@@ -127,19 +151,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Article.Title(childComplexity), true
 
-	case "Article.type":
-		if e.complexity.Article.Type == nil {
-			break
-		}
-
-		return e.complexity.Article.Type(childComplexity), true
-
 	case "Article.updated":
 		if e.complexity.Article.Updated == nil {
 			break
 		}
 
 		return e.complexity.Article.Updated(childComplexity), true
+
+	case "Article.views":
+		if e.complexity.Article.Views == nil {
+			break
+		}
+
+		return e.complexity.Article.Views(childComplexity), true
 
 	case "Mutation.createArticle":
 		if e.complexity.Mutation.CreateArticle == nil {
@@ -441,8 +465,8 @@ func (ec *executionContext) fieldContext_Article_title(_ context.Context, field 
 	return fc, nil
 }
 
-func (ec *executionContext) _Article_caption(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Article_caption(ctx, field)
+func (ec *executionContext) _Article_body(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_body(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -455,7 +479,7 @@ func (ec *executionContext) _Article_caption(ctx context.Context, field graphql.
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Caption, nil
+		return obj.Body, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -472,7 +496,7 @@ func (ec *executionContext) _Article_caption(ctx context.Context, field graphql.
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Article_caption(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Article_body(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Article",
 		Field:      field,
@@ -485,8 +509,8 @@ func (ec *executionContext) fieldContext_Article_caption(_ context.Context, fiel
 	return fc, nil
 }
 
-func (ec *executionContext) _Article_link(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Article_link(ctx, field)
+func (ec *executionContext) _Article_author(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_author(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -499,7 +523,7 @@ func (ec *executionContext) _Article_link(ctx context.Context, field graphql.Col
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Link, nil
+		return obj.Author, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -516,7 +540,7 @@ func (ec *executionContext) _Article_link(ctx context.Context, field graphql.Col
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Article_link(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Article_author(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Article",
 		Field:      field,
@@ -529,8 +553,8 @@ func (ec *executionContext) fieldContext_Article_link(_ context.Context, field g
 	return fc, nil
 }
 
-func (ec *executionContext) _Article_type(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Article_type(ctx, field)
+func (ec *executionContext) _Article_views(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_views(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -543,7 +567,139 @@ func (ec *executionContext) _Article_type(ctx context.Context, field graphql.Col
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Type, nil
+		return obj.Views, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Article_views(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Article",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Article_likes(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_likes(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Likes, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Article_likes(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Article",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Article_shares(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_shares(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Shares, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Article_shares(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Article",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Article_articleType(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_articleType(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ArticleType, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -560,7 +716,7 @@ func (ec *executionContext) _Article_type(ctx context.Context, field graphql.Col
 	return ec.marshalNArticleStyle2wiremanᚋgraphᚋmodelᚐArticleStyle(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Article_type(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Article_articleType(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Article",
 		Field:      field,
@@ -704,12 +860,18 @@ func (ec *executionContext) fieldContext_Mutation_createArticle(ctx context.Cont
 				return ec.fieldContext_Article_id(ctx, field)
 			case "title":
 				return ec.fieldContext_Article_title(ctx, field)
-			case "caption":
-				return ec.fieldContext_Article_caption(ctx, field)
-			case "link":
-				return ec.fieldContext_Article_link(ctx, field)
-			case "type":
-				return ec.fieldContext_Article_type(ctx, field)
+			case "body":
+				return ec.fieldContext_Article_body(ctx, field)
+			case "author":
+				return ec.fieldContext_Article_author(ctx, field)
+			case "views":
+				return ec.fieldContext_Article_views(ctx, field)
+			case "likes":
+				return ec.fieldContext_Article_likes(ctx, field)
+			case "shares":
+				return ec.fieldContext_Article_shares(ctx, field)
+			case "articleType":
+				return ec.fieldContext_Article_articleType(ctx, field)
 			case "created":
 				return ec.fieldContext_Article_created(ctx, field)
 			case "updated":
@@ -775,12 +937,18 @@ func (ec *executionContext) fieldContext_Query_articles(_ context.Context, field
 				return ec.fieldContext_Article_id(ctx, field)
 			case "title":
 				return ec.fieldContext_Article_title(ctx, field)
-			case "caption":
-				return ec.fieldContext_Article_caption(ctx, field)
-			case "link":
-				return ec.fieldContext_Article_link(ctx, field)
-			case "type":
-				return ec.fieldContext_Article_type(ctx, field)
+			case "body":
+				return ec.fieldContext_Article_body(ctx, field)
+			case "author":
+				return ec.fieldContext_Article_author(ctx, field)
+			case "views":
+				return ec.fieldContext_Article_views(ctx, field)
+			case "likes":
+				return ec.fieldContext_Article_likes(ctx, field)
+			case "shares":
+				return ec.fieldContext_Article_shares(ctx, field)
+			case "articleType":
+				return ec.fieldContext_Article_articleType(ctx, field)
 			case "created":
 				return ec.fieldContext_Article_created(ctx, field)
 			case "updated":
@@ -2701,7 +2869,7 @@ func (ec *executionContext) unmarshalInputNewArticle(ctx context.Context, obj in
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"title", "caption", "link", "type"}
+	fieldsInOrder := [...]string{"title", "body", "articleType", "author"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -2715,27 +2883,27 @@ func (ec *executionContext) unmarshalInputNewArticle(ctx context.Context, obj in
 				return it, err
 			}
 			it.Title = data
-		case "caption":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("caption"))
+		case "body":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("body"))
 			data, err := ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
-			it.Caption = data
-		case "link":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("link"))
-			data, err := ec.unmarshalNString2string(ctx, v)
-			if err != nil {
-				return it, err
-			}
-			it.Link = data
-		case "type":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("type"))
+			it.Body = data
+		case "articleType":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("articleType"))
 			data, err := ec.unmarshalNArticleStyle2wiremanᚋgraphᚋmodelᚐArticleStyle(ctx, v)
 			if err != nil {
 				return it, err
 			}
-			it.Type = data
+			it.ArticleType = data
+		case "author":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("author"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Author = data
 		}
 	}
 
@@ -2771,18 +2939,33 @@ func (ec *executionContext) _Article(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "caption":
-			out.Values[i] = ec._Article_caption(ctx, field, obj)
+		case "body":
+			out.Values[i] = ec._Article_body(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "link":
-			out.Values[i] = ec._Article_link(ctx, field, obj)
+		case "author":
+			out.Values[i] = ec._Article_author(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "type":
-			out.Values[i] = ec._Article_type(ctx, field, obj)
+		case "views":
+			out.Values[i] = ec._Article_views(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "likes":
+			out.Values[i] = ec._Article_likes(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "shares":
+			out.Values[i] = ec._Article_shares(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "articleType":
+			out.Values[i] = ec._Article_articleType(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -3350,6 +3533,21 @@ func (ec *executionContext) unmarshalNID2string(ctx context.Context, v interface
 
 func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.SelectionSet, v string) graphql.Marshaler {
 	res := graphql.MarshalID(v)
+	if res == graphql.Null {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+	}
+	return res
+}
+
+func (ec *executionContext) unmarshalNInt2int(ctx context.Context, v interface{}) (int, error) {
+	res, err := graphql.UnmarshalInt(v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.SelectionSet, v int) graphql.Marshaler {
+	res := graphql.MarshalInt(v)
 	if res == graphql.Null {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "the requested element is null which the schema does not allow")

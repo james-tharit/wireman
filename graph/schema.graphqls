@@ -12,9 +12,12 @@ enum ArticleStyle {
 type Article {
   id: ID!
   title: String!
-  caption: String!
-  link: String!
-  type: ArticleStyle!
+  body: String!
+  author: String!
+  views: Int!
+  likes: Int!
+  shares: Int!
+  articleType: ArticleStyle!
   created: String!
   updated: String!
 }
@@ -25,9 +28,9 @@ type Query {
 
 input NewArticle {
   title: String!
-  caption: String!
-  link: String!
-  type: ArticleStyle!
+  body: String!
+  articleType: ArticleStyle!
+  author: String!
 }
 
 type Mutation {

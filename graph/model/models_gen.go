@@ -9,23 +9,26 @@ import (
 )
 
 type Article struct {
-	ID      string       `json:"id"`
-	Title   string       `json:"title"`
-	Caption string       `json:"caption"`
-	Link    string       `json:"link"`
-	Type    ArticleStyle `json:"type"`
-	Created string       `json:"created"`
-	Updated string       `json:"updated"`
+	ID          string       `json:"id"`
+	Title       string       `json:"title"`
+	Body        string       `json:"body"`
+	Author      string       `json:"author"`
+	Views       int          `json:"views"`
+	Likes       int          `json:"likes"`
+	Shares      int          `json:"shares"`
+	ArticleType ArticleStyle `json:"articleType"`
+	Created     string       `json:"created"`
+	Updated     string       `json:"updated"`
 }
 
 type Mutation struct {
 }
 
 type NewArticle struct {
-	Title   string       `json:"title"`
-	Caption string       `json:"caption"`
-	Link    string       `json:"link"`
-	Type    ArticleStyle `json:"type"`
+	Title       string       `json:"title"`
+	Body        string       `json:"body"`
+	ArticleType ArticleStyle `json:"articleType"`
+	Author      string       `json:"author"`
 }
 
 type Query struct {

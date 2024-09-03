@@ -40,7 +40,9 @@ func main() {
 		port = defaultPort
 	}
 
-	graphqlServer := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+	resolver := &graph.Resolver{}
+
+	graphqlServer := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: resolver}))
 
 	router.Handle("/", playground.Handler("Wireman playground", "/query"))
 	router.Handle("/query", graphqlServer)

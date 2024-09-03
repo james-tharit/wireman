@@ -7,8 +7,8 @@ package graph
 import (
 	"context"
 	"fmt"
-	"time"
 	"wireman/graph/model"
+	"wireman/utils"
 )
 
 // CreateArticle is the resolver for the createArticle field.
@@ -19,25 +19,8 @@ func (r *mutationResolver) CreateArticle(ctx context.Context, input model.NewArt
 // Articles is the resolver for the articles field.
 func (r *queryResolver) Articles(ctx context.Context) ([]*model.Article, error) {
 	var arr []*model.Article
-	currentTime := time.Now()
-	article1 := &model.Article{
-		Title:   "นางแบกเพื่อไทย ตระบัดสัตย์ ไม่แคร์ เลือกผลประโยชน์ ช่าวเน็ตลั่น 'จะไปสุดที่ตรงไหน'",
-		ID:      "T1",
-		Type:    model.ArticleStyleGreenViper,
-		Created: currentTime.String(),
-		Updated: currentTime.String(),
-		Caption: "พรรคประชาธิปัตย์มีมติเอกฉันท์ 34 เสียง เข้าร่วมรัฐบาลเพื่อไทย",
-		Link:    "https://www.youtube.com/watch?si=7_HhjpeTeqmystp0&v=-ZC5Y8heDPk&feature=youtu.be",
-	}
-	article2 := &model.Article{
-		Title:   "ครั้งแรกประวัติศาสตร์ สว.ไทย 'เลือกกันเอง'",
-		ID:      "T2",
-		Type:    model.ArticleStyleMediumVioletRed,
-		Created: currentTime.String(),
-		Updated: currentTime.String(),
-		Caption: "คนไทยอึ้ง แบบนี้ก็ได้หรอ",
-		Link:    "https://www.thaipbs.or.th/news/content/337938",
-	}
+	article1 := utils.CreateMockArticle()
+	article2 := utils.CreateMockArticle()
 
 	return append(arr, article1, article2), nil
 }
