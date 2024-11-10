@@ -17,7 +17,7 @@ type Article {
   views: Int!
   likes: Int!
   shares: Int!
-  articleType: ArticleStyle!
+  articleStyle: ArticleStyle!
   created: String!
   updated: String!
 }

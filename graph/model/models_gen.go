@@ -9,16 +9,16 @@ import (
 )
 
 type Article struct {
-	ID          string       `json:"id"`
-	Title       string       `json:"title"`
-	Body        string       `json:"body"`
-	Author      string       `json:"author"`
-	Views       int          `json:"views"`
-	Likes       int          `json:"likes"`
-	Shares      int          `json:"shares"`
-	ArticleType ArticleStyle `json:"articleType"`
-	Created     string       `json:"created"`
-	Updated     string       `json:"updated"`
+	ID           string       `json:"id"`
+	Title        string       `json:"title"`
+	Body         string       `json:"body"`
+	Author       string       `json:"author"`
+	Views        int          `json:"views"`
+	Likes        int          `json:"likes"`
+	Shares       int          `json:"shares"`
+	ArticleStyle ArticleStyle `json:"articleStyle"`
+	Created      string       `json:"created"`
+	Updated      string       `json:"updated"`
 }
 
 type Mutation struct {

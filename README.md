@@ -1,5 +1,5 @@
 ## Wireman
-- Graphql server, BFF for Anonymity Project
+- Go Graphql server
 
 ### For generate graphQL, using the command
 ```sh

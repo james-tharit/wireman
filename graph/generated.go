@@ -48,16 +48,16 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Article struct {
-		ArticleType func(childComplexity int) int
-		Author      func(childComplexity int) int
-		Body        func(childComplexity int) int
-		Created     func(childComplexity int) int
-		ID          func(childComplexity int) int
-		Likes       func(childComplexity int) int
-		Shares      func(childComplexity int) int
-		Title       func(childComplexity int) int
-		Updated     func(childComplexity int) int
-		Views       func(childComplexity int) int
+		ArticleStyle func(childComplexity int) int
+		Author       func(childComplexity int) int
+		Body         func(childComplexity int) int
+		Created      func(childComplexity int) int
+		ID           func(childComplexity int) int
+		Likes        func(childComplexity int) int
+		Shares       func(childComplexity int) int
+		Title        func(childComplexity int) int
+		Updated      func(childComplexity int) int
+		Views        func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -95,12 +95,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	_ = ec
 	switch typeName + "." + field {
 
-	case "Article.articleType":
-		if e.complexity.Article.ArticleType == nil {
+	case "Article.articleStyle":
+		if e.complexity.Article.ArticleStyle == nil {
 			break
 		}
 
-		return e.complexity.Article.ArticleType(childComplexity), true
+		return e.complexity.Article.ArticleStyle(childComplexity), true
 
 	case "Article.author":
 		if e.complexity.Article.Author == nil {
@@ -685,8 +685,8 @@ func (ec *executionContext) fieldContext_Article_shares(_ context.Context, field
 	return fc, nil
 }
 
-func (ec *executionContext) _Article_articleType(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Article_articleType(ctx, field)
+func (ec *executionContext) _Article_articleStyle(ctx context.Context, field graphql.CollectedField, obj *model.Article) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Article_articleStyle(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -699,7 +699,7 @@ func (ec *executionContext) _Article_articleType(ctx context.Context, field grap
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.ArticleType, nil
+		return obj.ArticleStyle, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -716,7 +716,7 @@ func (ec *executionContext) _Article_articleType(ctx context.Context, field grap
 	return ec.marshalNArticleStyle2wiremanᚋgraphᚋmodelᚐArticleStyle(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Article_articleType(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Article_articleStyle(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Article",
 		Field:      field,
@@ -870,8 +870,8 @@ func (ec *executionContext) fieldContext_Mutation_createArticle(ctx context.Cont
 				return ec.fieldContext_Article_likes(ctx, field)
 			case "shares":
 				return ec.fieldContext_Article_shares(ctx, field)
-			case "articleType":
-				return ec.fieldContext_Article_articleType(ctx, field)
+			case "articleStyle":
+				return ec.fieldContext_Article_articleStyle(ctx, field)
 			case "created":
 				return ec.fieldContext_Article_created(ctx, field)
 			case "updated":
@@ -947,8 +947,8 @@ func (ec *executionContext) fieldContext_Query_articles(_ context.Context, field
 				return ec.fieldContext_Article_likes(ctx, field)
 			case "shares":
 				return ec.fieldContext_Article_shares(ctx, field)
-			case "articleType":
-				return ec.fieldContext_Article_articleType(ctx, field)
+			case "articleStyle":
+				return ec.fieldContext_Article_articleStyle(ctx, field)
 			case "created":
 				return ec.fieldContext_Article_created(ctx, field)
 			case "updated":
@@ -2964,8 +2964,8 @@ func (ec *executionContext) _Article(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "articleType":
-			out.Values[i] = ec._Article_articleType(ctx, field, obj)
+		case "articleStyle":
+			out.Values[i] = ec._Article_articleStyle(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
